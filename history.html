@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>History — Sujood</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .history-card { border-radius: 12px; padding: 14px; border: 1px solid rgba(6,78,59,0.06); }
+    .history-list .item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f1f5f9; }
+  </style>
+</head>
+
+<body class="bg-soft">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-blur py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.html">
+        <span class="logo-circle">S</span>
+        <span class="brand-text">Sujood</span>
+      </a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+          <li class="nav-item"><a class="nav-link text-white-50" href="search.html">Search</a></li>
+          <li class="nav-item"><a class="nav-link text-white-50" href="favorites.html">Favorites</a></li>
+          <li class="nav-item ms-2"><a class="btn bg-white text-success rounded-pill px-3 fw-bold" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="fw-bold mb-0">History</h3>
+        <div class="small-muted">Recently searched and visited mosques</div>
+      </div>
+      <div>
+        <button class="btn btn-outline-success">Clear all</button>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="history-card">
+          <h6 class="fw-bold mb-2">Recently Searched</h6>
+          <div class="history-list">
+            <div class="item"><div>Al-Farooq Mosque — Ikeja</div><small class="text-muted">Nov 24</small></div>
+            <div class="item"><div>Masjid Noor — Surulere</div><small class="text-muted">Nov 21</small></div>
+            <div class="item"><div>As-Salaam Centre — Yaba</div><small class="text-muted">Nov 18</small></div>
+            <div class="text-center py-3 text-muted">All search entries are UI-only placeholders</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="history-card">
+          <h6 class="fw-bold mb-2">Visited Mosques</h6>
+          <div class="history-list">
+            <div class="item"><div>Masjid Al-Ikhlas</div><small class="text-muted">Visited 3 days ago</small></div>
+            <div class="item"><div>Central Mosque Kano</div><small class="text-muted">Visited 2 weeks ago</small></div>
+            <div class="item"><div>Masjid Bilal</div><small class="text-muted">Visited 1 month ago</small></div>
+            <div class="text-center py-3 text-muted">Visited entries are recorded on visit (UI-only)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer bg-dark text-white pt-4 pb-4 mt-5">
+    <div class="container text-center small text-white-50">© 2025 Sujood — Activity history (UI-only)</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>AOS.init({ duration: 600, once: true });</script>
+</body>
+</html>

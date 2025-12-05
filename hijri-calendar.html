@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hijri Calendar — Sujood</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; }
+    .calendar-cell { border-radius:8px; padding:10px; border:1px solid rgba(6,78,59,0.05); background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(244,255,250,0.88)); min-height:72px }
+    .today { border: 1px solid #10b981; background: linear-gradient(180deg, rgba(240,255,247,0.95), rgba(255,255,255,0.92)); }
+  </style>
+</head>
+
+<body class="bg-soft">
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-blur py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.html">
+        <span class="logo-circle">S</span>
+        <span class="brand-text">Sujood</span>
+      </a>
+      <div class="ms-auto">
+        <a class="btn btn-outline-success" href="prayer-times.html">Prayer times</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="card-ghost p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h4 class="fw-bold mb-0">Hijri Calendar</h4>
+              <div class="small-muted">Gregorian → Hijri date converter & full month view (UI-only)</div>
+            </div>
+            <div>
+              <input type="date" class="form-control" />
+            </div>
+          </div>
+
+          <div class="calendar-grid mt-3">
+            <div class="calendar-cell small-muted">Sun</div>
+            <div class="calendar-cell small-muted">Mon</div>
+            <div class="calendar-cell small-muted">Tue</div>
+            <div class="calendar-cell small-muted">Wed</div>
+            <div class="calendar-cell small-muted">Thu</div>
+            <div class="calendar-cell small-muted">Fri</div>
+            <div class="calendar-cell small-muted">Sat</div>
+
+            <!-- sample week content (placeholders) -->
+            <div class="calendar-cell">1<br><small class="text-muted">25 Rabi' al-awwal</small></div>
+            <div class="calendar-cell">2<br><small class="text-muted">26 Rabi' al-awwal</small></div>
+            <div class="calendar-cell today">3<br><small class="text-success">Today • 28 Nov 2025</small></div>
+            <div class="calendar-cell">4<br><small class="text-muted">...</small></div>
+            <div class="calendar-cell">5<br><small class="text-muted">...</small></div>
+            <div class="calendar-cell">6<br><small class="text-muted">...</small></div>
+            <div class="calendar-cell">7<br><small class="text-muted">...</small></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card-ghost mb-3">
+          <h6 class="fw-bold">Today</h6>
+          <div class="d-flex align-items-center gap-3 mt-2">
+            <div class="display-6 fw-bold">19</div>
+            <div>
+              <div class="small-muted">Rabi' al-awwal</div>
+              <div class="fw-bold">1447 H</div>
+              <div class="text-muted small mt-1">Friday • 28 Nov 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-ghost">
+          <h6 class="fw-bold">Use cases</h6>
+          <ul class="small-muted ps-3 mb-0">
+            <li>Track Islamic dates</li>
+            <li>Convert dates for events</li>
+            <li>Use with prayer schedule</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer bg-dark text-white pt-4 pb-4 mt-5">
+    <div class="container text-center small text-white-50">© 2025 Sujood — Hijri calendar (UI-only)</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>AOS.init({ duration: 600, once: true });</script>
+</body>
+
+</html>

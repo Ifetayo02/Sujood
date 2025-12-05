@@ -5,13 +5,101 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Create Account — Sujood</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/style.css" />
+
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            /* soft cool gradient to match the project theme */
+            background-image: radial-gradient(circle at 8% 10%, rgba(10, 167, 120, 0.03), transparent 12%), linear-gradient(135deg, #f6fcfa 0%, #eef7ff 60%, #fbfdfb 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #064e3b !important;
+        }
+
+        .logo-circle {
+            background: #064e3b;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-card {
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(6, 78, 59, 0.1);
+        }
+
+        .img-cover {
+            object-fit: cover;
+            border-top-left-radius: 24px;
+            border-bottom-left-radius: 24px;
+            filter: brightness(0.9);
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
+            border-color: #10b981;
+            background-color: rgba(255, 255, 255, 0.92);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+            color: white;
+        }
+
+        .btn-google {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 10px;
+            font-weight: 500;
+            color: #1e293b;
+            transition: 0.3s;
+        }
+
+        .btn-google:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-forest py-3">
+<body>
+    <nav class="navbar py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
                 <span class="logo-circle">S</span>
@@ -20,52 +108,73 @@
         </div>
     </nav>
 
-    <main class="py-5">
+    <main class="flex-grow-1 d-flex align-items-center py-4">
         <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-lg-8">
-                    <div class="card shadow-sm overflow-hidden">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 col-xl-8">
+                    <div class="card auth-card overflow-hidden" data-aos="fade-up">
                         <div class="row g-0">
-                            <div class="col-md-6 d-none d-md-block">
-                                <img src="sign up image.png" class="img-fluid h-100 img-cover" alt="Sign up visual" />
+                            <div class="col-md-5 d-none d-md-block position-relative">
+                                <div
+                                    style="position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, #064e3b, transparent 70%); z-index: 1;">
+                                </div>
+                                <img src="sign up image.png" class="img-fluid h-100 w-100 img-cover"
+                                    alt="Sign up visual" />
+                                <div class="position-absolute bottom-0 start-0 p-4 text-white" style="z-index: 2;">
+                                    <h4 class="fw-bold">Join Community</h4>
+                                    <p class="small opacity-75 mb-0">Start your journey with thousands of others.</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card-body p-4">
-                                    <h3 class="card-title mb-3">Create an Account</h3>
-                                    <p class="text-muted small">Join Sujood to find mosques and get prayer times</p>
+                            <div class="col-md-7 card-surface">
+                                <div class="card-body p-4 p-lg-5">
+                                    <div class="text-center mb-4">
+                                        <h3 class="fw-bold mb-1">Create Account</h3>
+                                        <p class="text-muted small">Fill in the details below</p>
+                                    </div>
+
                                     <form class="mt-3" id="form">
                                         <div class="mb-3">
-                                            <label class="form-label">Full name</label>
+                                            <label class="form-label small fw-bold text-muted text-uppercase">Full
+                                                name</label>
                                             <input type="text" class="form-control" placeholder="Your name" required
                                                 id="fName" />
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Email address</label>
+                                            <label class="form-label small fw-bold text-muted text-uppercase">Email
+                                                address</label>
                                             <input type="email" class="form-control" placeholder="you@example.com"
                                                 required id="email" />
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Password</label>
+                                            <label
+                                                class="form-label small fw-bold text-muted text-uppercase">Password</label>
                                             <input type="password" class="form-control" placeholder="Create a password"
                                                 required id="password" />
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Confirm password</label>
+                                        <div class="mb-4">
+                                            <label class="form-label small fw-bold text-muted text-uppercase">Confirm
+                                                password</label>
                                             <input type="password" class="form-control" placeholder="Confirm password"
                                                 required />
                                         </div>
-                                        <div class="d-grid">
-                                            <button type="submit" class="btn btn-success">Sign Up</button>
-                                            <button type="submit"
-                                                class="btn btn-success mt-3 d-flex gap-3 align-items-center justify-content-center">
+                                        <div class="d-grid gap-2">
+                                            <button type="submit" class="btn btn-gradient">Sign Up</button>
+                                            <button type="button" onclick="signIn()"
+                                                class="btn btn-google d-flex gap-2 align-items-center justify-content-center">
                                                 <img src="material-icon-theme--google.png" alt="" width="20px"
-                                                    height="20px">Sign Up with Google</button>
+                                                    height="20px">
+                                                Sign Up with Google
+                                            </button>
                                         </div>
                                     </form>
 
-                                    <div class="text-center mt-3 small text-muted">Already have an account? <a
-                                            href="sign-in.html">Sign In</a></div>
-                                    <div class="text-center mt-2 small"><a href="index.html">Back to Home</a></div>
+                                    <div class="text-center mt-4 small text-muted">
+                                        Already have an account? <a href="sign-in.html"
+                                            class="text-success fw-bold text-decoration-none">Sign In</a>
+                                    </div>
+                                    <div class="text-center mt-3 small">
+                                        <a href="index.html" class="text-muted text-decoration-none">← Back to Home</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,9 +187,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>AOS.init({ duration: 700, once: true });</script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword , GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBe8v6EvUu2ewi_FDJvrpqdUx0t-anKsAA",
@@ -94,7 +204,8 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-
+        const provider = new GoogleAuthProvider();
+        let allUsers = JSON.parse(localStorage.getItem('Users')) || []; 
 
         const form = document.getElementById('form');
 
@@ -102,20 +213,21 @@
             e.preventDefault();
             const mail = document.getElementById("email").value;
             const pass = document.getElementById("password").value;
-            const fullNameInput = document.getElementById("fName");
+            const fullNameInput = document.getElementById("fName").value;
             console.log(mail);
-             
+
             if (mail === "" || pass === "" || fName === "") {
                 alert("Please fill in all fields");
                 return;
             }
             const user = {
-                fname: fullNameInput,
+                name: fullNameInput,
                 maily: mail,
                 passy: pass,
             };
-            const { maily, passy } = user;
-            localStorage.setItem('userInfo', JSON.stringify(user));
+            const { maily, passy,name } = user;
+            allUsers.push(user);
+            localStorage.setItem('Users', JSON.stringify(allUsers));
 
             console.log("Signing up with:", maily);
             createUserWithEmailAndPassword(auth, maily, passy)
@@ -126,13 +238,41 @@
 
                     setTimeout(() => {
                         window.location.href = "sign-in.html";
-                    }, 1000);
+                    }, 300);
                 })
                 .catch((error) => {
                     console.error(error);
                     alert(error.message);
                 });
         });
+
+
+        function signIn() {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log(user);
+                    console.log('All users', allUsers);
+                    let userData = {
+                        email: user.email,
+                        name: user.displayName,
+                        photo: user.photoURL,
+                    }
+                    console.log(userData);
+                    allUsers.push(userData);
+                    console.log(allUsers);
+                    localStorage.setItem('Users', JSON.stringify(allUsers));
+                    console.log("HI Google Sign-In Success:", user);
+                    
+                    setTimeout(() => {
+                        window.location.href = "sign-in.html";
+                    }, 3000)
+
+                }).catch((error) => {
+                    const errorCode = error.code
+                })
+        }
+        window.signIn=signIn;
     </script>
 </body>
 

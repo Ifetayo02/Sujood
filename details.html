@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mosque Details — Sujood</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css" />
+    <style>
+        .details-hero {
+            height: 300px; width: 100%; object-fit: cover;
+            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+        }
+        .action-fab {
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: absolute; top: 275px; right: 30px;
+            background: rgba(255,255,255,0.94); border: none; backdrop-filter: blur(6px);
+        }
+        .amenity-box {
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(244,255,250,0.9)); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 8px 20px rgba(6,78,59,0.04);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="position-relative">
+        <a href="search.html" class="btn btn-light rounded-circle shadow-sm position-absolute top-0 start-0 m-3" style="z-index:10;">←</a>
+        <img src="interior mosque.jpg" class="details-hero" alt="Mosque Image">
+        <button class="action-fab text-danger">❤️</button> </div>
+
+    <div class="container py-4 mt-2">
+        <h2 class="fw-bold mb-1">Al-Furqan Central Mosque</h2>
+        <p class="text-muted">📍 12, Lagos Street, Ikeja, Lagos State</p>
+
+        <div class="d-flex gap-2 my-4">
+            <button class="btn btn-success flex-grow-1 rounded-pill fw-bold py-2">Get Directions 🗺️</button>
+            <button class="btn btn-outline-secondary rounded-pill fw-bold py-2">Share</button>
+        </div>
+
+        <hr class="opacity-10 my-4">
+
+        <h5 class="fw-bold mb-3">Amenities</h5>
+        <div class="row g-3">
+            <div class="col-4">
+                <div class="amenity-box">
+                    <div class="fs-4 mb-1">💧</div>
+                    <small class="text-muted fw-bold">Wudu</small>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="amenity-box">
+                    <div class="fs-4 mb-1">🧕</div>
+                    <small class="text-muted fw-bold">Ladies</small>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="amenity-box">
+                    <div class="fs-4 mb-1">🅿️</div>
+                    <small class="text-muted fw-bold">Parking</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

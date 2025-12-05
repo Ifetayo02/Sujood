@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — Sujood</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --primary-dark: #064e3b;
+      --primary-main: #10b981;
+      --primary-light: #ecfdf5;
+      --text-muted: #64748b;
+      --bg-soft: #f8fafc;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-soft);
+      color: #1e293b;
+    }
+
+    /* Navbar Styling */
+    .navbar-glass {
+      background: rgba(6, 78, 59, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .brand-text {
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      font-size: 1.25rem;
+    }
+
+    /* Card Systems */
+    .card-modern {
+      background: white;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      height: 100%;
+    }
+
+    .card-modern:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Featured Highlight Box (Next Prayer) */
+    .highlight-box {
+      background: linear-gradient(135deg, var(--primary-light) 0%, #d1fae5 100%);
+      color: var(--primary-dark);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    /* Quick Action Buttons */
+    .btn-soft {
+      background-color: white;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary-light);
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .btn-soft:hover {
+      background-color: var(--primary-light);
+      color: var(--primary-main);
+    }
+
+    .btn-primary-gradient {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-primary-gradient:hover {
+      color: white;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* List Styling */
+    .list-item-clean {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .list-item-clean:last-child {
+      border-bottom: none;
+    }
+
+    /* Map Placeholder Pattern */
+    .map-placeholder {
+      background-color: #e2e8f0;
+      background-image: radial-gradient(#cbd5e1 2px, transparent 2px);
+      background-size: 20px 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .text-muted-custom {
+      color: var(--text-muted) !important;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-glass sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <i class="bi bi-moon-stars-fill text-warning"></i>
+        <span class="brand-text">Sujood</span>
+      </a>
+
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link px-3" href="search.html">Search</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="prayer-times.html">Prayer Times</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="hadith.html">Hadith</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm bg-white text-success rounded-pill px-4 fw-bold" href="profile.html">Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+
+    <div class="row align-items-center mb-5" data-aos="fade-down">
+      <div class="col-md-8">
+        <div class="text-muted-custom mb-1" id="day"><i class="bi bi-calendar-event me-2"></i>Nov 28, 2025 • Lagos</div>
+        <h2 class="fw-bold display-6 mb-0">Welcome back, <span style="color: var(--primary-main)"
+            id="name">Sujood</span></h2>
+      </div>
+      <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <div class="d-flex gap-2 justify-content-md-end">
+          <a href="add-mosque.html" class="btn btn-soft"><i class="bi bi-plus-lg me-1"></i> Add Mosque</a>
+          <a href="search.html" class="btn btn-primary-gradient"><i class="bi bi-search me-1"></i> Search</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gy-4">
+
+      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-modern d-flex flex-column justify-content-between">
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h5 class="fw-bold mb-1">Prayer Schedule</h5>
+              <div class="text-muted-custom">Synced for your location</div>
+            </div>
+            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">Live Updates</span>
+          </div>
+
+          <div class="row g-4 align-items-center">
+            <div class="col-md-4">
+              <div class="highlight-box h-100 d-flex flex-column justify-content-center" id="next-prayer-box">
+                <div class="small fw-bold text-uppercase opacity-75 mb-1">Coming up</div>
+                <h3 class="fw-bold mb-0" id="next-prayer-name">Dhuhr</h3>
+                <div class="display-5 fw-bold my-1" id="next-prayer-time">12:45</div>
+                <div class="small fw-bold opacity-75" id="next-prayer-ampm">PM</div>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <div class="d-flex gap-3 mb-4 text-center" id="prayer-grid">
+                <div class="flex-fill p-2 rounded-3 prayer-cell" id="cell-fajr">
+                  <div class="small" id="label-fajr">Fajr</div>
+                  <div class="fw-bold" id="time-fajr">05:30</div>
+                </div>
+                <div class="flex-fill p-2 rounded-3 prayer-cell" id="cell-dhuhr">
+                  <div class="small" id="label-dhuhr">Dhuhr</div>
+                  <div class="fw-bold" id="time-dhuhr">12:45</div>
+                </div>
+                <div class="flex-fill p-2 rounded-3 prayer-cell" id="cell-asr">
+                  <div class="small" id="label-asr">Asr</div>
+                  <div class="fw-bold" id="time-asr">16:05</div>
+                </div>
+                <div class="flex-fill p-2 rounded-3 prayer-cell" id="cell-maghrib">
+                  <div class="small" id="label-maghrib">Maghrib</div>
+                  <div class="fw-bold" id="time-maghrib">18:30</div>
+                </div>
+                <div class="flex-fill p-2 rounded-3 prayer-cell" id="cell-isha">
+                  <div class="small" id="label-isha">Isha</div>
+                  <div class="fw-bold" id="time-isha">20:00</div>
+                </div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="p-3 border rounded-3 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-warning">
+                      <i class="bi bi-moon-stars"></i> <span class="small fw-bold text-dark">Hijri Date</span>
+                    </div>
+                    <div class="fw-bold" id="hijri-date">19 Rabi' al-awwal</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 border rounded-3 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-primary">
+                      <i class="bi bi-quote"></i> <span class="small fw-bold text-dark">Daily Hadith</span>
+                    </div>
+                    <div class="small text-muted text-truncate" > <p id="daily-hadith"> "Smiling is charity...</p>
+                       <button id="toggle-btn">Read more</button>
+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-modern">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0">Find Mosques</h5>
+            <a href="search.html" class="text-success text-decoration-none small fw-bold">Open Map <i
+                class="bi bi-arrow-right"></i></a>
+          </div>
+
+          <div class="map-placeholder mb-3" style="height: 180px;">
+            <div class="text-center">
+              <i class="bi bi-geo-alt fs-2 text-secondary d-block mb-2"></i>
+              <span>Map Preview</span>
+            </div>
+          </div>
+
+          <div class="small text-uppercase text-muted fw-bold mb-2" style="font-size: 0.75rem;">Recent Searches</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-light text-dark border py-2 px-3 fw-normal">Ikeja Central</span>
+            <span class="badge bg-light text-dark border py-2 px-3 fw-normal">Yaba Tech</span>
+            <span class="badge bg-light text-dark border py-2 px-3 fw-normal">Lekki Ph 1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
+        <div class="card-modern">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0">Favorite Mosques</h5>
+            <a href="favorites.html" class="btn btn-sm btn-light rounded-pill px-3">View All</a>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 border rounded-4 d-flex align-items-center gap-3">
+                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 48px; height: 48px; font-weight:bold;">M</div>
+                <div>
+                  <div class="fw-bold">Masjid Noor</div>
+                  <div class="small text-muted">Ikeja, Lagos</div>
+                </div>
+                <div class="ms-auto text-warning small fw-bold"><i class="bi bi-star-fill"></i> 4.8</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 border rounded-4 d-flex align-items-center gap-3">
+                <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 48px; height: 48px; font-weight:bold;">A</div>
+                <div>
+                  <div class="fw-bold">As-Salam Center</div>
+                  <div class="small text-muted">Yaba, Lagos</div>
+                </div>
+                <div class="ms-auto text-warning small fw-bold"><i class="bi bi-star-fill"></i> 4.6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="card-modern h-100">
+          <h5 class="fw-bold mb-3">This Week</h5>
+          <div class="list-item-clean">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill text-success"></i>
+              <span>Mosques Visited</span>
+            </div>
+            <span class="fw-bold">4</span>
+          </div>
+          <div class="list-item-clean">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-primary"></i>
+              <span>Prayers Logged</span>
+            </div>
+            <span class="fw-bold">18</span>
+          </div>
+          <div class="mt-3 pt-3 border-top text-center">
+            <a href="history.html" class="small text-muted text-decoration-none">View full history</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center text-white-50">
+      <small>&copy; 2025 Sujood. Designed with <i class="bi bi-heart-fill text-danger mx-1"></i> in Lagos.</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>AOS.init({ duration: 800, once: true });</script>
+  <script>
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || [];
+    if (currentUser && currentUser.name) {
+      document.getElementById('name').textContent = currentUser.name;
+    }
+
+    const day = new Date();
+    const newDay = day.toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+    document.getElementById('day').textContent = newDay;
+
+    window.onload = function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+      } else {
+        alert('Geolocation is not supported by your browser');
+      }
+    };
+    async function getPrayerTimes(lat, lon) {
+      const today = new Date();
+      const d = String(today.getDate()).padStart(2, '0');
+      const m = String(today.getMonth() + 1).padStart(2, '0');
+      const y = today.getFullYear();
+      const newDay = `${d}-${m}-${y}`;
+
+      const url = `https://api.aladhan.com/v1/timings/${newDay}?latitude=${lat}&longitude=${lon}&method=2`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const times = data.data.timings;
+        const hijri = data.data.date.hijri;
+
+        console.log("Prayer Times:", times);
+        document.getElementById("time-fajr").textContent = times.Fajr;
+        document.getElementById("time-dhuhr").textContent = times.Dhuhr;
+        document.getElementById("time-asr").textContent = times.Asr;
+        document.getElementById("time-maghrib").textContent = times.Maghrib;
+        document.getElementById("time-isha").textContent = times.Isha;
+
+        return { times, hijri };
+
+      } catch (err) {
+        console.error("Error fetching prayer times:", err);
+      }
+    }
+    function getNextPrayer(times) {
+      const now = new Date();
+      const prayerNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+      for (let prayer of prayerNames) {
+        const [hours, minutes] = times[prayer].split(":").map(Number);
+
+        const prayerTime = new Date();
+        prayerTime.setHours(hours, minutes, 0, 0);
+
+        if (prayerTime > now) return prayer;
+      }
+
+      return "Fajr";
+    }
+    function getPrayerAMPM(timeString, prayerName) {
+      if (prayerName === "Fajr") return "AM";
+      else return "PM";
+    }
+    async function showNextPrayer(lat, lon) {
+      const result = await getPrayerTimes(lat, lon);
+      if (!result) return;
+
+      const times = result.times;
+      const next = getNextPrayer(times);
+
+      document.getElementById('next-prayer-name').textContent = next;
+      document.getElementById('next-prayer-time').textContent = times[next];
+      const ampm = getPrayerAMPM(times[next], next);
+      document.getElementById('next-prayer-ampm').textContent = ampm;
+
+      console.log("Next Prayer:", next, times[next], ampm);
+    }
+    async function showHijriDate(lat, lon) {
+      const result = await getPrayerTimes(lat, lon);
+      if (!result) return;
+
+      const hijri = result.hijri;
+      const hijriDateString = `${hijri.day} ${hijri.month.en} ${hijri.year} AH`;
+
+      console.log("Hijri Date:", hijriDateString);
+
+      document.getElementById("hijri-date").textContent = hijriDateString;
+    }
+    function success(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      console.log('Latitude:', lat);
+      console.log('Longitude:', lon);
+
+      showNextPrayer(lat, lon);
+      showHijriDate(lat, lon);
+      loadHadith()
+    }
+    let fullHadith = "";          // store full text
+const truncateLength = 200;   // number of chars to show initially
+let isTruncated = true;
+
+async function loadHadith() {
+  try {
+    const res = await fetch('https://random-hadith-generator.vercel.app/bukhari');
+    const data = await res.json();
+
+    // Access English hadith (adjust according to your API)
+    fullHadith = data.data.hadith_english;
+
+    // Display truncated version
+    document.getElementById("daily-hadith").innerText = truncate(fullHadith, truncateLength);
+
+    // Reset button text
+    document.getElementById("toggle-btn").innerText = "Read more";
+    isTruncated = true;
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("hadith-text").innerText = "Failed to load hadith.";
+  }
+}
+
+function truncate(text, length) {
+  if (text.length <= length) return text;
+  return text.slice(0, length) + "...";
+}
+
+// Toggle button
+document.getElementById("toggle-btn").addEventListener("click", () => {
+  const p = document.getElementById("daily-hadith");
+  if (isTruncated) {
+    document.getElementById("daily-hadith").innerText = fullHadith;
+    document.getElementById("toggle-btn").innerText = "Read less";
+  } else {
+    p.innerText = truncate(fullHadith, truncateLength);
+    document.getElementById("toggle-btn").innerText = "Read more";
+  }
+  isTruncated = !isTruncated;
+});
+
+// Load hadith on page load
+loadHadith();
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+      alert('Location access is needed for accurate prayer times');
+    }
+  </script>
+
+
+</body>
+
+</html>

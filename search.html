@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search Mosques — Sujood</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .search-banner { border-radius: 16px; padding: 18px; background: linear-gradient(180deg, rgba(248,255,251,0.95), rgba(255,255,255,0.92)); border: 1px solid rgba(6,78,59,0.06); }
+    .filter-pill { border-radius: 999px; padding: 6px 12px; background: rgba(6,78,59,0.06); display:inline-block; margin-right:6px; }
+    .mosque-card { border-radius: 12px; padding: 14px; border: 1px solid rgba(10,100,70,0.06); }
+  </style>
+</head>
+
+<body class="bg-soft">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-blur py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <span class="logo-circle">S</span>
+        <span class="brand-text">Sujood</span>
+      </a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+          <li class="nav-item"><a class="nav-link text-white-50" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link text-white-50 active" href="search.html">Search</a></li>
+          <li class="nav-item"><a class="nav-link text-white-50" href="favorites.html">Favorites</a></li>
+          <li class="nav-item ms-2"><a class="btn bg-white text-success rounded-pill px-3 fw-bold" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="search-banner d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h4 class="mb-1 fw-bold">Search Mosques</h4>
+        <p class="mb-0 small text-muted">Use filters to narrow results by city, facilities, or distance</p>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <input class="form-control" type="search" placeholder="Search mosque name or address" style="min-width:320px" />
+        <a href="add-mosque.html" class="btn btn-gradient">Add Mosque</a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-3">
+        <div class="card-ghost p-3">
+          <h6 class="fw-bold mb-3">Filters</h6>
+          <div class="mb-3 small-muted">City</div>
+          <select class="form-select mb-3">
+            <option>All Cities</option>
+            <option>Lagos</option>
+            <option>Abuja</option>
+            <option>Kano</option>
+          </select>
+
+          <div class="mb-3 small-muted">Facilities</div>
+          <div class="mb-3">
+            <label class="filter-pill">Prayer hall</label>
+            <label class="filter-pill">Wudu area</label>
+            <label class="filter-pill">Parking</label>
+          </div>
+
+          <div class="d-grid mt-3">
+            <button class="btn btn-outline-success">Clear filters</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h5 class="mb-0">Results — 32 mosques</h5>
+            <div class="small-muted">Sorted by distance</div>
+          </div>
+          <div class="small-muted">Map • UI-only</div>
+        </div>
+
+        <div class="list-group">
+          <!-- sample mosque card -->
+          <a class="list-group-item mosque-card list-group-item-action mb-2" href="mosque-details.html">
+            <div class="d-flex gap-3 align-items-center">
+              <div style="width:72px;height:72px;background:linear-gradient(135deg,#10b981,#064e3b);border-radius:12px;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">M</div>
+              <div>
+                <div class="fw-bold">Masjid Al-Mustaqim</div>
+                <div class="text-muted small">Surulere, Lagos • 1.4 km</div>
+                <div class="small text-muted mt-1">Open • Prayer hall • Wudu</div>
+              </div>
+              <div class="ms-auto text-end small-muted">
+                <div>⭐ 4.7</div>
+                <div class="mt-2"><small class="text-success">Open now</small></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- repeat sample -->
+          <a class="list-group-item mosque-card list-group-item-action mb-2" href="mosque-details.html">
+            <div class="d-flex gap-3 align-items-center">
+              <div style="width:72px;height:72px;background:linear-gradient(135deg,#10b981,#064e3b);border-radius:12px;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">A</div>
+              <div>
+                <div class="fw-bold">As-Salaam Centre</div>
+                <div class="text-muted small">Yaba, Lagos • 2.2 km</div>
+                <div class="small text-muted mt-1">Open • Parking • Community</div>
+              </div>
+              <div class="ms-auto text-end small-muted">
+                <div>⭐ 4.5</div>
+                <div class="mt-2"><small class="text-success">Open now</small></div>
+              </div>
+            </div>
+          </a>
+
+          <!-- empty state suggestion -->
+          <div class="text-center py-4 text-muted">End of sample results • Real results will load from your app logic.</div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer bg-dark text-white pt-4 pb-4 mt-5">
+    <div class="container text-center small text-white-50">
+      © 2025 Sujood — Search UI
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>AOS.init({ duration: 600, once: true });</script>
+</body>
+</html>
