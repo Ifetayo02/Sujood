@@ -358,17 +358,29 @@
       renderJournalList();
     };
 
+  // 2. GEOLOCATION - MANUAL & AUTO
+    window.onload = function () {
+      forceLocationCheck(); // Try automatically
+      renderJournalList();
+    };
+
+    // --- PASTE THIS NEW FUNCTION HERE ---
     function forceLocationCheck() {
+      // Show a loading state so you know it's working
+      const btnText = document.getElementById('btn-text');
+      if(btnText) btnText.innerHTML = '<div class="spinner-border spinner-border-sm me-2"></div> Warming up GPS...';
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success, error, {
-          enableHighAccuracy: true, // Forces GPS (more accurate than WiFi)
-          timeout: 5000,
-          maximumAge: 0
+          enableHighAccuracy: false, // <--- CRITICAL: Use Wi-Fi (Works indoors)
+          timeout: 30000,            // <--- CRITICAL: Wait 30 seconds before failing
+          maximumAge: Infinity       // <--- CRITICAL: Use cached location if available
         });
       } else {
         alert("Geolocation is not supported by this browser.");
       }
     }
+  
 
     function success(position) {
       const lat = position.coords.latitude;
@@ -383,6 +395,15 @@
       
       // Update Link
       mapBtn.href = `https://www.google.com/maps/search/mosques/@${lat},${lon},15z`;
+      const debugText = document.createElement('div');
+      debugText.style.fontSize = "0.7rem";
+      debugText.style.marginTop = "5px";
+      debugText.style.opacity = "0.8";
+      debugText.innerText = `GPS detected: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+      // Clear previous debug text if any
+      const existingDebug = mapBtn.querySelector('div');
+      if(existingDebug) existingDebug.remove();
+      mapBtn.appendChild(debugText);
       
       // Load Data
       showNextPrayer(lat, lon);
