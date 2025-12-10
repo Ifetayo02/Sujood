@@ -190,7 +190,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword , GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword , GoogleAuthProvider, signInWithPopup,updateProfile } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBe8v6EvUu2ewi_FDJvrpqdUx0t-anKsAA",
@@ -235,10 +235,24 @@
                     const firebaseUser = result.user;
                     console.log("Success:", firebaseUser);
                     alert("Account created!");
+                    console.log(fullNameInput);
+                    
+                    updateProfile(firebaseUser,   {
+                        displayName: fullNameInput,
+                    }).then(() => {
+                        console.log("Profile updated successfully");
+                    }).catch((error) => {
+                        console.error("Error updating profile:", error.message);
+                    }
+                )
+
+                console.log(user);
+                
 
                     setTimeout(() => {
                         window.location.href = "sign-in.html";
                     }, 300);
+                    
                 })
                 .catch((error) => {
                     console.error(error);

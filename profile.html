@@ -2,128 +2,265 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Profile — Sujood</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile — Sujood</title>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-	<link rel="stylesheet" href="assets/style.css">
-	<style>
-		.avatar { width:86px;height:86px;border-radius:20px;background:linear-gradient(135deg,#10b981,#064e3b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:26px }
-	</style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-dark: #064e3b;
+            --primary-main: #10b981;
+            --primary-light: #ecfdf5;
+            --text-muted: #64748b;
+            --bg-soft: #f8fafc;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-soft);
+            color: #1e293b;
+        }
+
+        /* Navbar Glass Effect */
+        .navbar-glass {
+            background: rgba(6, 78, 59, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-text {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .logo-circle {
+            background: white;
+            color: #064e3b;
+            width: 35px;
+            height: 35px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        /* Modern Card Style */
+        .card-modern {
+            background: white;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+            margin-bottom: 24px;
+        }
+
+        /* Avatar Styling */
+        .avatar-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 48px;
+            margin: 0 auto;
+            border: 4px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0, 0.05);
+        }
+
+        /* Custom Buttons */
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
+            color: white;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary-gradient:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Danger Zone */
+        .card-danger {
+            border: 1px solid rgba(220, 53, 69, 0.2);
+            background: #fff5f5;
+        }
+    </style>
 </head>
 
-<body class="bg-soft">
-	<nav class="navbar navbar-expand-lg navbar-dark navbar-blur py-3">
-		<div class="container">
-			<a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.html">
-				<span class="logo-circle">S</span>
-				<span class="brand-text">Sujood</span>
-			</a>
-			<div class="ms-auto d-flex gap-2">
-				<a href="index.html" class="btn btn-outline-success">Home</a>
-			</div>
-		</div>
-	</nav>
+<body>
 
-	<main class="container py-5">
-		<div class="row g-4">
-			<div class="col-lg-4">
-				<div class="card-ghost p-4 text-center">
-					<div class="avatar mx-auto mb-3">S</div>
-					<h5 class="fw-bold mb-0">Sami Ahmed</h5>
-					<div class="text-muted small mb-3">sami@example.com</div>
-					<div class="d-grid gap-2">
-						<button class="btn btn-gradient">Edit profile</button>
-						<button class="btn btn-outline-danger">Log out</button>
-					</div>
-				</div>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-glass sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.html">
+                <span class="logo-circle">S</span>
+                <span class="brand-text">Sujood</span>
+            </a>
+            <div class="ms-auto d-flex gap-2">
+                <a href="dashboard.html" class="btn btn-sm btn-outline-light rounded-pill px-4">Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
 
-				<div class="card-ghost mt-3 p-3">
-					<h6 class="fw-bold mb-2">Quick stats</h6>
-					<div class="d-flex justify-content-between small-muted px-1">
-						<div>
-							<div class="fw-bold">12</div>
-							<div class="small text-muted">favorites</div>
-						</div>
-						<div>
-							<div class="fw-bold">8</div>
-							<div class="small text-muted">visited</div>
-						</div>
-						<div>
-							<div class="fw-bold">23</div>
-							<div class="small text-muted">searches</div>
-						</div>
-					</div>
-				</div>
-			</div>
+    <main class="container py-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-4">
+                <div class="card-modern text-center">
+                    <div class="avatar-box mb-3">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    
+                    <h5 class="fw-bold mb-0" id="display-name">Loading...</h5>
+                    <div class="text-muted small mb-4" id="display-email">user@example.com</div>
+                    
+                    <div class="d-grid gap-2">
+                        <button onclick="logoutUser()" class="btn btn-outline-danger rounded-pill">
+                            <i class="bi bi-box-arrow-right me-2"></i>Log Out
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-			<div class="col-lg-8">
-				<div class="card-ghost p-4 mb-3">
-					<h6 class="fw-bold mb-3">Account settings</h6>
-					<div class="row g-3">
-						<div class="col-md-6">
-							<label class="form-label small text-muted">Display name</label>
-							<input class="form-control" value="Sami Ahmed" />
-						</div>
-						<div class="col-md-6">
-							<label class="form-label small text-muted">Email</label>
-							<input class="form-control" value="sami@example.com" />
-						</div>
+            <div class="col-lg-8">
+                
+                <div class="card-modern">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-success bg-opacity-10 text-success rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                            <i class="bi bi-person-lines-fill"></i>
+                        </div>
+                        <h5 class="fw-bold mb-0">Edit Profile</h5>
+                    </div>
 
-						<div class="col-12">
-							<label class="form-label small text-muted">Timezone</label>
-							<select class="form-select">
-								<option>UTC+1 (Lagos)</option>
-								<option>UTC+0</option>
-								<option>UTC-5</option>
-							</select>
-						</div>
+                    <form onsubmit="updateProfile(event)">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label small fw-bold text-muted">Display Name</label>
+                                <input type="text" id="input-name" class="form-control" placeholder="Enter your name">
+                                <div class="form-text small">This name will appear on your dashboard.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="submit" class="btn btn-primary-gradient rounded-pill px-4">Update Name</button>
+                        </div>
+                    </form>
+                </div>
 
-						<div class="col-12">
-							<label class="form-label small text-muted">Preferences</label>
-							<div class="form-check form-switch d-flex justify-content-between align-items-center">
-								<div>
-									<input class="form-check-input me-2" type="checkbox" id="notif" checked>
-									<label class="form-check-label" for="notif">Prayer notifications</label>
-								</div>
-								<small class="text-muted">sound off</small>
-							</div>
-							<div class="form-check form-switch d-flex justify-content-between align-items-center mt-2">
-								<div>
-									<input class="form-check-input me-2" type="checkbox" id="dark" >
-									<label class="form-check-label" for="dark">Dark mode (UI placeholder)</label>
-								</div>
-								<small class="text-muted">Beta</small>
-							</div>
-						</div>
+                <div class="card-modern">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                        <h5 class="fw-bold mb-0">Change Password</h5>
+                    </div>
 
-						<div class="col-12 d-flex justify-content-end mt-3">
-							<button class="btn btn-outline-secondary me-2">Cancel</button>
-							<button class="btn btn-gradient">Save changes</button>
-						</div>
-					</div>
-				</div>
+                    <form onsubmit="changePassword(event)">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Current Password</label>
+                            <input type="password" class="form-control" placeholder="••••••••">
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">New Password</label>
+                                <input type="password" class="form-control" placeholder="New password">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm new password">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="submit" class="btn btn-outline-dark rounded-pill px-4">Update Password</button>
+                        </div>
+                    </form>
+                </div>
 
-				<div class="card-ghost p-3">
-					<h6 class="fw-bold mb-3">Security</h6>
-					<div class="small-muted mb-2">Manage your login methods and connected apps (UI-only)</div>
-					<div class="d-flex gap-2 mt-3">
-						<button class="btn btn-outline-primary">Change password</button>
-						<button class="btn btn-outline-dark">Connected accounts</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+                <div class="card-modern card-danger">
+                    <h6 class="fw-bold text-danger mb-3">Danger Zone</h6>
+                    <p class="small text-muted">Once you delete your account, there is no going back. All your saved journal entries and preferences will be lost forever.</p>
+                    <button onclick="deleteAccount()" class="btn btn-danger btn-sm rounded-pill px-4">Delete My Account</button>
+                </div>
 
-	<footer class="footer bg-dark text-white pt-4 pb-4 mt-5">
-		<div class="container text-center small text-white-50">© 2025 Sujood — Profile (UI-only)</div>
-	</footer>
+            </div>
+        </div>
+    </main>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-	<script>AOS.init({ duration: 600, once: true });</script>
+    <footer class="py-4 text-center">
+        <div class="container">
+            <small class="text-muted">© 2025 Sujood. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 1. Load User Data
+        window.onload = function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+            
+            if (currentUser.name) {
+                document.getElementById('display-name').textContent = currentUser.name;
+                document.getElementById('input-name').value = currentUser.name;
+            } else {
+                document.getElementById('display-name').textContent = "Guest User";
+                document.getElementById('input-name').value = "";
+            }
+
+            if (currentUser.email) {
+                document.getElementById('display-email').textContent = currentUser.email;
+            }
+        };
+
+        // 2. Update Profile
+        function updateProfile(e) {
+            e.preventDefault();
+            
+            const newName = document.getElementById('input-name').value;
+            let currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+            
+            if(!newName.trim()) {
+                alert("Please enter a valid name.");
+                return;
+            }
+
+            currentUser.name = newName;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            alert('Profile updated successfully!');
+            location.reload(); 
+        }
+
+        // 3. Change Password
+        function changePassword(e) {
+            e.preventDefault();
+            alert('Password update link sent to your email (Mock Action).');
+        }
+
+        // 4. Delete Account
+        function deleteAccount() {
+            if(confirm("Are you sure? This will delete all your journal entries and settings permanently.")) {
+                localStorage.clear();
+                window.location.href = "index.html"; 
+            }
+        }
+
+        // 5. Logout
+        function logoutUser() {
+            if(confirm("Log out now?")) {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
 </body>
 </html>
