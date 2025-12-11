@@ -158,7 +158,7 @@
                                                 required />
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <button type="submit" class="btn btn-gradient">Sign Up</button>
+                                            <button type="submit" class="btn btn-gradient" id="signup-btn">Sign Up</button>
                                             <button type="button" onclick="signIn()"
                                                 class="btn btn-google d-flex gap-2 align-items-center justify-content-center">
                                                 <img src="material-icon-theme--google.png" alt="" width="20px"
@@ -188,9 +188,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>AOS.init({ duration: 700, once: true });</script>
 
-    <script type="module">
+  <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword , GoogleAuthProvider, signInWithPopup,updateProfile } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBe8v6EvUu2ewi_FDJvrpqdUx0t-anKsAA",
@@ -205,88 +205,102 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
-        let allUsers = JSON.parse(localStorage.getItem('Users')) || []; 
+        let allUsers = JSON.parse(localStorage.getItem('Users')) || [];
 
         const form = document.getElementById('form');
+        const signupBtn = document.getElementById('signup-btn'); // Grab the button
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+
+            // 1. Get Values
             const mail = document.getElementById("email").value;
             const pass = document.getElementById("password").value;
             const fullNameInput = document.getElementById("fName").value;
-            console.log(mail);
 
-            if (mail === "" || pass === "" || fName === "") {
+            // 2. Validation
+            if (mail === "" || pass === "" || fullNameInput === "") {
                 alert("Please fill in all fields");
                 return;
             }
+
+            // 3. UI: START SPINNER
+            // Save original text so we can put it back if there is an error
+            const originalBtnText = signupBtn.innerHTML;
+            
+            // Change button to spinner
+            signupBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Creating Account...`;
+            signupBtn.disabled = true; // Stop user from clicking twice
+
+            // Local Storage Logic
             const user = {
                 name: fullNameInput,
                 maily: mail,
                 passy: pass,
             };
-            const { maily, passy,name } = user;
             allUsers.push(user);
             localStorage.setItem('Users', JSON.stringify(allUsers));
 
-            console.log("Signing up with:", maily);
-            createUserWithEmailAndPassword(auth, maily, passy)
+            // 4. Firebase Sign Up
+            createUserWithEmailAndPassword(auth, mail, pass)
                 .then((result) => {
                     const firebaseUser = result.user;
                     console.log("Success:", firebaseUser);
-                    alert("Account created!");
-                    console.log(fullNameInput);
-                    
-                    updateProfile(firebaseUser,   {
+
+                    // Update Profile with Name
+                    updateProfile(firebaseUser, {
                         displayName: fullNameInput,
                     }).then(() => {
-                        console.log("Profile updated successfully");
-                    }).catch((error) => {
-                        console.error("Error updating profile:", error.message);
-                    }
-                )
+                        console.log("Profile updated");
+                    }).catch((err) => console.error(err));
 
-                console.log(user);
-                
+                    // 5. UI: SUCCESS STATE
+                    signupBtn.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>Success!`;
+                    signupBtn.classList.remove('btn-gradient'); // Remove green gradient
+                    signupBtn.classList.add('btn-success');     // Add solid green
 
+                    // Redirect after a short delay
                     setTimeout(() => {
                         window.location.href = "sign-in.html";
-                    }, 300);
-                    
+                    }, 1500); 
                 })
                 .catch((error) => {
                     console.error(error);
                     alert(error.message);
+
+                    // 6. UI: ERROR STATE (RESET BUTTON)
+                    signupBtn.innerHTML = originalBtnText; // Put "Sign Up" text back
+                    signupBtn.disabled = false;            // Make clickable again
                 });
         });
 
-
+        // Google Sign In
         function signIn() {
             signInWithPopup(auth, provider)
                 .then((result) => {
                     const user = result.user;
-                    console.log(user);
-                    console.log('All users', allUsers);
+                    
+                    // Simple spinner feedback for Google too if you want
+                    // alert("Google Sign-In Success! Redirecting...");
+                    
                     let userData = {
                         email: user.email,
                         name: user.displayName,
                         photo: user.photoURL,
                     }
-                    console.log(userData);
                     allUsers.push(userData);
-                    console.log(allUsers);
                     localStorage.setItem('Users', JSON.stringify(allUsers));
-                    console.log("HI Google Sign-In Success:", user);
                     
                     setTimeout(() => {
                         window.location.href = "sign-in.html";
-                    }, 3000)
+                    }, 1000)
 
                 }).catch((error) => {
-                    const errorCode = error.code
+                    console.error(error);
+                    alert(error.message);
                 })
         }
-        window.signIn=signIn;
+        window.signIn = signIn;
     </script>
 </body>
 
