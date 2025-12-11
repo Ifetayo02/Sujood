@@ -185,7 +185,7 @@
                <i class="bi bi-geo-alt-fill me-1"></i> Refresh Location
              </button>
           </div>
-          <h2 class="fw-bold display-6 mb-0">Welcome back, <span style="color: var(--primary-main)" id="name">User</span></h2>
+          <h2 class="fw-bold display-6 mb-0">Welcome back, <span style="color: var(--primary-main)" id="name"></span></h2>
         </div>
       </div>
 
@@ -368,10 +368,9 @@
 
   <script>
     // 1. BASIC SETUP
-    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
-    if (currentUser.name) {
-      document.getElementById('name').textContent = currentUser.name;
-    }
+    // const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+    // if (currentUser.name) {
+    // }
 
     const day = new Date();
     document.getElementById('day').innerHTML = `<i class="bi bi-calendar-event me-2"></i>${day.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
@@ -614,6 +613,8 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     console.log("User is signed in:", user);
+    document.getElementById('name').textContent = user.displayName;
+
   } else {
     window.location.href = "sign-up.html";
   }
