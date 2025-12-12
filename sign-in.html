@@ -143,7 +143,7 @@
                                         </div>
                                         <div class="d-grid gap-2">
                                             <button type="submit" class="btn btn-gradient"
-                                                onclick="validateLogin()">Sign In</button>
+                                               >Sign In</button>
                                             <button type="button"
                                                 class="btn btn-google d-flex gap-2 align-items-center justify-content-center mt-2 border-1"
                                                 onclick="signIn()">
@@ -171,9 +171,9 @@
     </main>
 
 
-    <script type="module">
+   <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,  signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBe8v6EvUu2ewi_FDJvrpqdUx0t-anKsAA",
@@ -189,75 +189,80 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        const fetchedUsers = JSON.parse(localStorage.getItem('Users')) || [];
-        console.log('Fetched users from localStorage:', fetchedUsers);
-
-
         const form = document.getElementById('form');
+        const submitBtn = document.querySelector('button[type="submit"]'); // Grab the Sign In button
 
+        // 1. HANDLE EMAIL SIGN IN (Form Submit)
         form.addEventListener('submit', (e) => {
-            e.preventDefault();
-        });
+            e.preventDefault(); // Stop page reload
 
-        function signIn() {
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    const user = result.user;
-                    console.log(user);
-                    let userData = {
-                        email: user.email,
-                        name: user.displayName,
-                        photo: user.photoURL,
-                    }
-                    console.log(userData);
-                        setTimeout(() => {
-                            window.location.href = "dashboard.html";
-                        }, 300)
-                }).catch((error) => {
-                    const errorCode = error.code
-                })
-        }
-        window.signIn = signIn;
+            const email = document.getElementById('mail').value;
+            const password = document.getElementById('password').value;
 
-        function validateLogin() {
-       
-             const email=document.getElementById('mail').value;
-             const password=document.getElementById('pass').value;
+            // UI Feedback: Show spinner
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Signing In...`;
+            submitBtn.disabled = true;
 
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    const user = userCredential.user;
-                   console.log(user);
-                   window.location.href="dashboard.html";
-                   
+                    // Success
+                    console.log("Logged in:", userCredential.user);
+                    submitBtn.innerHTML = `<i class="bi bi-check-lg me-2"></i>Success`;
+                    submitBtn.classList.replace('btn-gradient', 'btn-success');
                     
+                    setTimeout(() => {
+                        window.location.href = "dashboard.html";
+                    }, 500);
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                   alert('Invalid email or password. Please try again.');
+                    // Error
+                    console.error(error);
+                    alert("Invalid email or password. Please try again.");
+                    
+                    // Reset Button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
 
+        // 2. HANDLE GOOGLE SIGN IN
+        function signIn() {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    console.log("Google User:", result.user);
+                    
+                    // Optional: Save to local storage for quick access
+                    let userData = {
+                        email: result.user.email,
+                        name: result.user.displayName,
+                        photo: result.user.photoURL,
+                    };
+                    let allUsers = JSON.parse(localStorage.getItem('Users')) || [];
+                    allUsers.push(userData);
+                    localStorage.setItem('Users', JSON.stringify(allUsers));
+
+                    window.location.href = "dashboard.html";
+                }).catch((error) => {
+                    console.error(error);
+                    alert(error.message);
                 });
         }
-        window.validateLogin = validateLogin;
+        window.signIn = signIn;
 
-         window.togglePassword = function() {
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.getElementById('toggleIcon');
+        // 3. TOGGLE PASSWORD VISIBILITY
+        window.togglePassword = function() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
 
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text'; // Show Password
-            toggleIcon.classList.remove('bi-eye-slash');
-            toggleIcon.classList.add('bi-eye');
-        } else {
-            passwordInput.type = 'password'; // Hide Password
-            toggleIcon.classList.remove('bi-eye');
-            toggleIcon.classList.add('bi-eye-slash');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.replace('bi-eye-slash', 'bi-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.replace('bi-eye', 'bi-eye-slash');
+            }
         }
-    }
-
-
-
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
