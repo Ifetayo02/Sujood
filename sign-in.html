@@ -122,13 +122,13 @@
                                             <label class="form-label small fw-bold text-muted text-uppercase">Email
                                                 address</label>
                                             <input type="email" class="form-control" placeholder="you@example.com"
-                                                required id="mail"/>
+                                                required id="mail" />
                                         </div>
                                         <div class="mb-4">
                                             <label
                                                 class="form-label small fw-bold text-muted text-uppercase">Password</label>
                                             <input type="password" class="form-control" placeholder="••••••••"
-                                                required />
+                                                required id="pass" />
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-4">
                                             <div class="form-check">
@@ -168,10 +168,10 @@
         </div>
     </main>
 
-    
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,  signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBe8v6EvUu2ewi_FDJvrpqdUx0t-anKsAA",
@@ -186,10 +186,10 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
-        
+
         const fetchedUsers = JSON.parse(localStorage.getItem('Users')) || [];
         console.log('Fetched users from localStorage:', fetchedUsers);
-           
+
 
         const form = document.getElementById('form');
 
@@ -202,43 +202,46 @@
                 .then((result) => {
                     const user = result.user;
                     console.log(user);
-                     let userData = {
+                    let userData = {
                         email: user.email,
                         name: user.displayName,
                         photo: user.photoURL,
                     }
                     console.log(userData);
-                    const exists=fetchedUsers.some(u=>u.email===userData.email);
-                    if(!exists){
+                    const exists = fetchedUsers.some(u => u.email === userData.email);
+                    if (!exists) {
                         alert('You do not have an account, please sign up first');
-                        // fetchedUsers.push(userData);
-                        // localStorage.setItem('Users',JSON.stringify(fetchedUsers));
-                    }else if(exists){ 
-                    setTimeout(() => {
-                        localStorage.setItem('currentUser', JSON.stringify(userData));
-                        window.location.href = "dashboard.html";
-                    }, 300)
-                }
+                    } else if (exists) {
+                        setTimeout(() => {
+                            localStorage.setItem('currentUser', JSON.stringify(userData));
+                            window.location.href = "dashboard.html";
+                        }, 300)
+                    }
                 }).catch((error) => {
                     const errorCode = error.code
                 })
         }
         window.signIn = signIn;
-        
+
         function validateLogin() {
-            const email= document.getElementById('mail').value;
-            const found = fetchedUsers.find(user => user.maily === email);
-            console.log('User found:', found);
-            console.log(email);
-            
-            if (found) {
-                 localStorage.setItem('currentUser', JSON.stringify(found));
-                setTimeout(() => {
-                    window.location.href = "dashboard.html";
-                }, 200);
-            } else {
-                alert('Invalid email or password. Please try again.');
-            }
+       
+             const email=document.getElementById('mail').value;
+             const password=document.getElementById('pass').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                   console.log(user);
+                   window.location.href="dashboard.html";
+                   
+                    
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                   alert('Invalid email or password. Please try again.');
+
+                });
         }
         window.validateLogin = validateLogin;
     </script>

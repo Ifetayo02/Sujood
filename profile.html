@@ -208,8 +208,9 @@
 							<h6 class="fw-bold text-danger mb-2">Delete Account</h6>
 							<p class="small text-muted mb-3">Deleting your account is permanent. All your data will be
 								wiped.</p>
-							<button onclick="deleteAccount()"
-								class="btn btn-danger btn-sm rounded-pill px-4 fw-bold">Yes, Delete My Account</button>
+							<button onclick=""
+								class="btn btn-danger btn-sm rounded-pill px-4 fw-bold" data-bs-toggle="modal"
+								data-bs-target="#deleteAccountModal">Yes, Delete My Account</button>
 						</div>
 					</div>
 				</div>
@@ -267,6 +268,31 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" style="max-width: 350px;">
+			<div class="modal-content border-0 shadow-lg" style="border-radius: 24px; overflow: hidden;">
+
+				<div class="modal-body p-4 text-center">
+					<div class="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+						style="width: 60px; height: 60px;">
+						<i class="bi bi-box-arrow-right fs-3"></i>
+					</div>
+
+					<h5 class="fw-bold mb-2">Delete Account</h5>
+					<p class="text-muted small mb-4">Are you sure you want to delete your account?</p>
+
+					<div class="d-flex gap-2 justify-content-center">
+						<button type="button" class="btn btn-light rounded-pill px-4 fw-bold w-50"
+							data-bs-dismiss="modal" onclick="closeAccountModal()">Cancel</button>
+						<button type="button" onclick="confirmDeleteAccount()" class="btn btn-danger rounded-pill px-4 fw-bold w-50"
+							id="modalUpdateBtn" id="deleteInput">Delete</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
 
 	<footer class="py-4 text-center">
 		<div class="container">
@@ -278,7 +304,7 @@
 
 <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut, updateProfile, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut, updateProfile, updatePassword, EmailAuthProvider, reauthenticateWithCredential,deleteUser} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBe8v6EvUu2ewi_FDJvrpqdUx0t-anKsAA",
@@ -289,7 +315,6 @@
             appId: "1:370785864080:web:15c0ced9fea8e9e7fd0b15",
             measurementId: "G-R4PSSZT0YV"
         };
-
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
@@ -421,6 +446,29 @@
                 modal.style.display = "none"; // Force hide
             }
         }
+		   window.closeAccountModal = function() {
+            const modal = document.getElementById('deleteAccountModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.style.display = "none"; // Force hide
+            }
+        }
+		function confirmDeleteAccount(){
+			const user=auth.currentUser;
+			// const userRef=ref(database,`users/${user.uid}`);
+		
+			deleteUser(user).then(()=>{
+				alert('Account successfully deleted')
+				window.location.href="index.html";
+			}).catch((error)=>{
+				console.error(error);
+
+				if(error.code==="auth requires-recent-login"){
+					alert("For security,log in again before deleting your account.")
+				}
+			})
+		}
+		window.confirmDeleteAccount = confirmDeleteAccount;
     </script>
 
 </body>
