@@ -610,6 +610,8 @@
 
 const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
+  console.log(user);
+  
   if (user) {
     const uid = user.uid;
     console.log("User is signed in:", user);
