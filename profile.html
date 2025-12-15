@@ -184,8 +184,8 @@
                                                 <input type="password" class="form-control border-end-0"
                                                     placeholder="Input your current password" required id="currentpassword" />
                                                 <span class="input-group-text bg-white border-start-0"
-                                                    style="cursor: pointer;" onclick="togglePassword()">
-                                                    <i class="bi bi-eye-slash" id="toggleIcon"></i>
+                                                    style="cursor: pointer;" onclick="togglePassword('currentpassword','icon-current')">
+                                                    <i class="bi bi-eye-slash" id="icon-current"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -196,8 +196,8 @@
                                                 <input type="password" class="form-control border-end-0"
                                                     placeholder="Input your new password" required id="newPassword" />
                                                 <span class="input-group-text bg-white border-start-0"
-                                                    style="cursor: pointer;" onclick="togglePassword()">
-                                                    <i class="bi bi-eye-slash" id="toggleIcon"></i>
+                                                    style="cursor: pointer;" onclick="togglePassword('newPassword','icon-new')">
+                                                    <i class="bi bi-eye-slash" id="icon-new"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -208,8 +208,8 @@
                                                 <input type="password" class="form-control border-end-0"
                                                     placeholder="Confirm your new password" required id="confirmPassword" />
                                                 <span class="input-group-text bg-white border-start-0"
-                                                    style="cursor: pointer;" onclick="togglePassword()">
-                                                    <i class="bi bi-eye-slash" id="toggleIcon"></i>
+                                                    style="cursor: pointer;" onclick="togglePassword('confirmPassword','icon-confirm')">
+                                                    <i class="bi bi-eye-slash" id="icon-confirm"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -492,18 +492,20 @@
 			})
 		}
 		window.confirmDeleteAccount = confirmDeleteAccount;
-		 window.togglePassword = function() {
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.getElementById('toggleIcon');
+	    window.togglePassword = function(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
 
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text'; 
-            toggleIcon.classList.remove('bi-eye-slash');
-            toggleIcon.classList.add('bi-eye');
+        if (input.type === 'password') {
+            // Switch to Text
+            input.type = 'text';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
         } else {
-            passwordInput.type = 'password'; 
-            toggleIcon.classList.remove('bi-eye');
-            toggleIcon.classList.add('bi-eye-slash');
+            // Switch back to Password
+            input.type = 'password';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
         }
     }
     </script>

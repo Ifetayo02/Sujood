@@ -153,7 +153,7 @@
                                                 <input type="password" class="form-control border-end-0"
                                                     placeholder="Create a password" required id="password" />
                                                 <span class="input-group-text bg-white border-start-0"
-                                                    style="cursor: pointer;" onclick="togglePassword()">
+                                                    style="cursor: pointer;" onclick="togglePassword('password','icon-password')">
                                                     <i class="bi bi-eye-slash" id="toggleIcon"></i>
                                                 </span>
                                             </div>
@@ -165,7 +165,7 @@
                                                 <input type="password" class="form-control border-end-0"
                                                     placeholder="Confirm your password" required id="confirmPassword" />
                                                 <span class="input-group-text bg-white border-start-0"
-                                                    style="cursor: pointer;" onclick="togglePassword()">
+                                                    style="cursor: pointer;" onclick="togglePassword('confirmPassword','icon-newPassword')">
                                                     <i class="bi bi-eye-slash" id="toggleIcon"></i>
                                                 </span>
                                             </div>
@@ -318,18 +318,20 @@
                 })
         }
         window.signIn = signIn;
-        window.togglePassword = function() {
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.getElementById('toggleIcon');
+    window.togglePassword = function(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
 
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text'; // Show Password
-            toggleIcon.classList.remove('bi-eye-slash');
-            toggleIcon.classList.add('bi-eye');
+        if (input.type === 'password') {
+            // Switch to Text
+            input.type = 'text';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
         } else {
-            passwordInput.type = 'password'; // Hide Password
-            toggleIcon.classList.remove('bi-eye');
-            toggleIcon.classList.add('bi-eye-slash');
+            // Switch back to Password
+            input.type = 'password';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
         }
     }
     </script>
