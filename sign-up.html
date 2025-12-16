@@ -225,31 +225,21 @@
         let allUsers = JSON.parse(localStorage.getItem('Users')) || [];
 
         const form = document.getElementById('form');
-        const signupBtn = document.getElementById('signup-btn'); // Grab the button
+        const signupBtn = document.getElementById('signup-btn'); 
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-
-            // 1. Get Values
             const mail = document.getElementById("email").value;
             const pass = document.getElementById("password").value;
             const fullNameInput = document.getElementById("fName").value;
-
-            // 2. Validation
             if (mail === "" || pass === "" || fullNameInput === "") {
                 alert("Please fill in all fields");
                 return;
             }
-
-            // 3. UI: START SPINNER
-            // Save original text so we can put it back if there is an error
             const originalBtnText = signupBtn.innerHTML;
-
-            // Change button to spinner
             signupBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Creating Account...`;
-            signupBtn.disabled = true; // Stop user from clicking twice
-
-            // Local Storage Logic
+            signupBtn.disabled = true; 
+           
             const user = {
                 name: fullNameInput,
                 maily: mail,
@@ -258,25 +248,22 @@
             allUsers.push(user);
             localStorage.setItem('Users', JSON.stringify(allUsers));
 
-            // 4. Firebase Sign Up
+            
             createUserWithEmailAndPassword(auth, mail, pass)
                 .then((result) => {
                     const firebaseUser = result.user;
-                    console.log("Success:", firebaseUser);
 
-                    // Update Profile with Name
+                
                     updateProfile(firebaseUser, {
                         displayName: fullNameInput,
                     }).then(() => {
-                        console.log("Profile updated");
+                        
                     }).catch((err) => console.error(err));
 
-                    // 5. UI: SUCCESS STATE
+                    
                     signupBtn.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>Success!`;
-                    signupBtn.classList.remove('btn-gradient'); // Remove green gradient
-                    signupBtn.classList.add('btn-success');     // Add solid green
-
-                    // Redirect after a short delay
+                    signupBtn.classList.remove('btn-gradient'); 
+                    signupBtn.classList.add('btn-success');     
                     setTimeout(() => {
                         window.location.href = "sign-in.html";
                     }, 1500);
@@ -284,22 +271,14 @@
                 .catch((error) => {
                     console.error(error);
                     alert(error.message);
-
-                    // 6. UI: ERROR STATE (RESET BUTTON)
-                    signupBtn.innerHTML = originalBtnText; // Put "Sign Up" text back
-                    signupBtn.disabled = false;            // Make clickable again
+                    signupBtn.innerHTML = originalBtnText; 
+                    signupBtn.disabled = false;          
                 });
         });
-
-        // Google Sign In
         function signIn() {
             signInWithPopup(auth, provider)
                 .then((result) => {
                     const user = result.user;
-
-                    // Simple spinner feedback for Google too if you want
-                    // alert("Google Sign-In Success! Redirecting...");
-
                     let userData = {
                         email: user.email,
                         name: user.displayName,
@@ -323,12 +302,10 @@
         const icon = document.getElementById(iconId);
 
         if (input.type === 'password') {
-            // Switch to Text
             input.type = 'text';
             icon.classList.remove('bi-eye-slash');
             icon.classList.add('bi-eye');
         } else {
-            // Switch back to Password
             input.type = 'password';
             icon.classList.remove('bi-eye');
             icon.classList.add('bi-eye-slash');
