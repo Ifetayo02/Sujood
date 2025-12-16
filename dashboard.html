@@ -90,8 +90,6 @@
       padding: 2rem;
       flex: 1; 
     }
-
-    /* --- MOBILE RESPONSIVE --- */
     @media (max-width: 768px) {
       body { padding-bottom: 70px; }
       .sidebar {
@@ -108,7 +106,7 @@
       .main-content { margin-left: 0; padding: 1.5rem; }
     }
 
-    /* --- BUTTONS --- */
+    
     .btn-primary-gradient {
       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
       color: white;
@@ -367,26 +365,17 @@
   <script>AOS.init({ duration: 800, once: true });</script>
 
   <script>
-    // 1. BASIC SETUP
-    // const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
-    // if (currentUser.name) {
-    // }
 
     const day = new Date();
     document.getElementById('day').innerHTML = `<i class="bi bi-calendar-event me-2"></i>${day.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
     document.getElementById('schedule').innerHTML="Prayer Schedule for " + day.toLocaleDateString('en-US', { month: 'long', day: 'numeric' ,year:'numeric'});
 
-    // 2. GEOLOCATION - MANUAL & AUTO
     window.onload = function () {
-      forceLocationCheck(); // Try automatically
+      forceLocationCheck(); 
       renderJournalList();
     };
 
-
-
-    // --- PASTE THIS NEW FUNCTION HERE ---
     function forceLocationCheck() {
-      // Show a loading state so you know it's working
       const btnText = document.getElementById('btn-text');
       if(btnText) btnText.innerHTML = '<div class="spinner-border spinner-border-sm me-2"></div> Warming up GPS...';
 
@@ -405,15 +394,10 @@
     function success(position) {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      
-      console.log('Got Location:', lat, lon); // DEBUG CHECK
-
-      // Update UI to prove we found it
       const mapBtn = document.getElementById('mosque-finder-btn');
       const btnText = document.getElementById('btn-text');
       btnText.innerHTML = `Find Mosques Near Me <i class="bi bi-box-arrow-up-right ms-2"></i>`;
       
-      // Update Link
       mapBtn.href = `https://www.google.com/maps/search/mosques/@${lat},${lon},15z`;
       showNextPrayer(lat, lon);
       showHijriDate(lat, lon);
@@ -422,7 +406,7 @@
 
     function error(err) {
       console.warn("Location Error:", err.code, err.message);
-      // Show explicit alert so you know WHY it failed
+
       if (err.code === 1) alert("Location Denied. Please allow location permission in browser settings.");
       else if (err.code === 2) alert("Location Unavailable. GPS signal lost.");
       else alert("Location Timed Out.");
@@ -431,7 +415,7 @@
       btnText.innerText = "Location Failed. Click to retry.";
     }
 
-    // 3. ZAKAT LOGIC
+
     function calculateZakat() {
       const assets = document.getElementById('asset-amount').value;
       const nisab = 17000000;
@@ -447,7 +431,7 @@
       }
     }
 
-    // 4. DUA LOGIC
+ 
     function getDua(mood, element) {
       const title = document.getElementById('dua-title');
       const arabic = document.getElementById('dua-arabic');
@@ -482,8 +466,6 @@
       element.classList.remove('btn-light', 'border');
       element.classList.add('btn-dark');
     }
-
-    // 5. JOURNAL LOGIC
     function saveJournal() {
       const text = document.getElementById('journal-input').value;
       if(!text.trim()) return;
@@ -527,15 +509,11 @@
         localStorage.setItem('journalEntries', JSON.stringify(entries));
         renderJournalList();
     }
-
-    // 6. DEED GENERATOR
     const goodDeeds = ["Smile at a stranger.", "Remove an obstacle.", "Call your parents.", "Feed a stray animal.", "Forgive someone.", "Read Surah Al-Ikhlas 3x.", "Give charity."];
     function generateDeed() {
       const random = Math.floor(Math.random() * goodDeeds.length);
       document.getElementById('deed-text').innerText = `"${goodDeeds[random]}"`;
     }
-
-    // 7. API HELPERS
     async function getPrayerTimes(lat, lon) {
       const today = new Date();
       const newDay = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
@@ -571,8 +549,8 @@
       const prayerNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
       let next = "Fajr";
       for (let prayer of prayerNames) {
-        const [h, m] = times[prayer].split(":").map(Number);
-        const pDate = new Date(); pDate.setHours(h, m, 0, 0);
+        const [hours, minutes] = times[prayer].split(":").map(Number);
+        const pDate = new Date(); pDate.setHours(hours, minutes, 0, 0);
         if (pDate > now) { next = prayer; break; }
       }
       document.getElementById('next-prayer-name').textContent = next;
@@ -610,22 +588,18 @@
 
 const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
-  console.log(user);
-  
   if (user) {
     const uid = user.uid;
-    console.log("User is signed in:", user);
     document.getElementById('name').textContent = user.displayName;
 
   } else {
-    // window.location.href = "sign-up.html";
+    window.location.href = "sign-up.html";
   }
 });
 function checkUser(){
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
-      console.log(user.displayName);
       document.getElementById('name').textContent = user.displayName;
     } else {
       window.location.href = "sign-up.html";
@@ -636,7 +610,6 @@ function confirmLogout(){
 signOut(auth).then(() => {
   window.location.href = "sign-in.html";
 }).catch((error) => {
-  // An error happened.
 });
 }
 window.confirmLogout = confirmLogout;

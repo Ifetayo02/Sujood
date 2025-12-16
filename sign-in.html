@@ -190,24 +190,18 @@
         const provider = new GoogleAuthProvider();
 
         const form = document.getElementById('form');
-        const submitBtn = document.querySelector('button[type="submit"]'); // Grab the Sign In button
-
-        // 1. HANDLE EMAIL SIGN IN (Form Submit)
+        const submitBtn = document.querySelector('button[type="submit"]'); 
         form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Stop page reload
+            e.preventDefault();
 
             const email = document.getElementById('mail').value;
             const password = document.getElementById('password').value;
-
-            // UI Feedback: Show spinner
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Signing In...`;
             submitBtn.disabled = true;
 
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    // Success
-                    console.log("Logged in:", userCredential.user);
                     submitBtn.innerHTML = `<i class="bi bi-check-lg me-2"></i>Success`;
                     submitBtn.classList.replace('btn-gradient', 'btn-success');
                     
@@ -216,23 +210,15 @@
                     }, 500);
                 })
                 .catch((error) => {
-                    // Error
                     console.error(error);
                     alert("Invalid email or password. Please try again.");
-                    
-                    // Reset Button
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                 });
         });
-
-        // 2. HANDLE GOOGLE SIGN IN
         function signIn() {
             signInWithPopup(auth, provider)
                 .then((result) => {
-                    console.log("Google User:", result.user);
-                    
-                    // Optional: Save to local storage for quick access
                     let userData = {
                         email: result.user.email,
                         name: result.user.displayName,
@@ -249,8 +235,6 @@
                 });
         }
         window.signIn = signIn;
-
-        // 3. TOGGLE PASSWORD VISIBILITY
         window.togglePassword = function() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.getElementById('toggleIcon');

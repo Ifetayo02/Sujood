@@ -51,8 +51,6 @@
 			justify-content: center;
 			font-weight: 800;
 		}
-
-		/* Modern Card Style */
 		.card-modern {
 			background: white;
 			border: 1px solid rgba(255, 255, 255, 0.6);
@@ -340,23 +338,16 @@
         };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-
-        // 1. AUTH STATE OBSERVER
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("User is signed in:", user.email);
                 document.getElementById('display-name').textContent = user.displayName || "User";
                 document.getElementById('display-email').textContent = user.email;
-                
-                // Pre-fill the name input if it exists
                 const nameInput = document.getElementById('input-name');
                 if(nameInput) nameInput.value = user.displayName || "";
             } else {
                 window.location.href = "sign-up.html";
             }
         });
-
-        // 2. LOGOUT FUNCTION
         window.confirmLogout = function() {
             if(confirm("Are you sure you want to log out?")) {
                 signOut(auth).then(() => {
@@ -366,8 +357,6 @@
                 });
             }
         }
-
-        // 3. CHANGE NAME FUNCTION
         window.changeName = function(e) {
             e.preventDefault();
             const nameInput = document.getElementById('input-name');
@@ -387,21 +376,14 @@
                 alert(error.message);
             });
         }
-
-        // 4. HELPER: HANDLE PASSWORD UPDATE (Async Logic)
         async function handlePasswordUpdate(newPassword, credential) {
             const user = auth.currentUser;
             try {
-                // Re-authenticate user to prove identity
                 await reauthenticateWithCredential(user, credential);
-                
-                // Update Password
                 await updatePassword(user, newPassword);
                 
                 alert('Password updated successfully.');
 				document.getElementById('changePasswordModal').classList.add('hidden');
-                
-                // Clear form
                 document.getElementById('currentPassword').value = "";
                 document.getElementById('newPassword').value = "";
                 document.getElementById('confirmNewPassword').value = "";
@@ -417,22 +399,14 @@
                 }
             }
         }
-
-        // 5. CHANGE PASSWORD FUNCTION (Triggered by button)
         window.changePassword = function(e) {
             if(e) e.preventDefault();
-
-            // Get Elements
             const currentPassInput = document.getElementById('currentPassword');
             const newPassInput = document.getElementById('newPassword');
             const confirmPassInput = document.getElementById('confirmNewPassword');
-
-            // Get Values
             const currentVal = currentPassInput.value;
             const newVal = newPassInput.value;
             const confirmVal = confirmPassInput.value;
-
-            // Validate
             if (!currentVal || !newVal || !confirmVal) {
                 alert("Please fill in all password fields.");
                 return;
@@ -442,23 +416,15 @@
                 alert("New passwords do not match.");
                 return;
             }
-
-			
-
             const user = auth.currentUser;
-            
-            // Create Credential for Re-auth
             const credential = EmailAuthProvider.credential(
                 user.email,
                 currentVal 
             );
-
-            // Call Helper
             handlePasswordUpdate(newVal, credential);
         }
 		window.openPasswordModal = function() {
             const modal = document.getElementById('changePasswordModal');
-                // If using Bootstrap class 'd-none' or custom 'hidden'
                 modal.classList.remove('hidden'); 
 		}
 
@@ -466,20 +432,19 @@
             const modal = document.getElementById('changePasswordModal');
             if (modal) {
                 modal.classList.add('hidden');
-                modal.style.display = "none"; // Force hide
+                modal.style.display = "none";
             }
         }
-		   window.closeAccountModal = function() {
+		   function closeAccountModal() {
             const modal = document.getElementById('deleteAccountModal');
             if (modal) {
                 modal.classList.add('hidden');
-                modal.style.display = "none"; // Force hide
+                modal.style.display = "none"; 
             }
         }
+		window.closeAccountModal=closeAccountModal;
 		function confirmDeleteAccount(){
 			const user=auth.currentUser;
-			// const userRef=ref(database,`users/${user.uid}`);
-		
 			deleteUser(user).then(()=>{
 				alert('Account successfully deleted')
 				window.location.href="index.html";
@@ -497,12 +462,10 @@
         const icon = document.getElementById(iconId);
 
         if (input.type === 'password') {
-            // Switch to Text
             input.type = 'text';
             icon.classList.remove('bi-eye-slash');
             icon.classList.add('bi-eye');
         } else {
-            // Switch back to Password
             input.type = 'password';
             icon.classList.remove('bi-eye');
             icon.classList.add('bi-eye-slash');
