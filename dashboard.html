@@ -536,8 +536,8 @@
   </script>
      <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword , GoogleAuthProvider, signInWithPopup,onAuthStateChanged,signOut  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-        import { getDatabase, ref, push, set } from "firebase/database";
+        import { getAuth, createUserWithEmailAndPassword ,onAuthStateChanged , GoogleAuthProvider, signInWithPopup,signOut  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getDatabase, ref, push, set,onValue,remove } from  "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBe8v6EvUu2ewi_FDJvrpqdUx0t-anKsAA",
@@ -579,11 +579,9 @@ signOut(auth).then(() => {
 });
 }
 window.confirmLogout = confirmLogout;
-  import { getDatabase, ref, push, set, onValue, remove } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // 1. Setup global variables
-const auth = getAuth();
+
 const db = getDatabase();
 
 // 2. SAVE FUNCTION
