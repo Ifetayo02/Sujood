@@ -522,16 +522,43 @@
       document.getElementById('next-prayer-ampm').textContent = (next === "Fajr") ? "AM" : "PM";
     }
 
-    async function loadHadith() {
+async function loadHadith() {
       try {
-       const res = await fetch('https://api.allorigins.win/raw?url=https://random-hadith-generator.vercel.app/bukhari');
-        const data = await res.json();
-        document.getElementById("daily-hadith").innerText = data.data.hadith_english;
-        document.getElementById("modal-hadith-content").innerText = data.data.hadith_english;
+        // We use the /get endpoint which wraps the data safely
+        const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://random-hadith-generator.vercel.app/bukhari');
+        
+        const res = await fetch(url);
+        const proxyData = await res.json();
+
+        // AllOrigins puts the actual API response inside a string called 'contents'
+        // So we have to parse it back into a JavaScript object
+        const data = JSON.parse(proxyData.contents);
+
+        // DEBUG: Peek inside the box! Look at your console to see this.
+        console.log("Here is the data from the API:", data);
+
+        if (!data || !data.data) {
+           console.warn("The API didn't send the expected data structure.");
+           return;
+        }
+
+        // Access English hadith
+        let fullHadith = data.data.hadith_english;
+
+        // Display truncated version
+        document.getElementById("daily-hadith").innerText = fullHadith;
+
+        // Populate the modal
+        document.getElementById("modal-hadith-content").innerText = fullHadith;
         document.getElementById("book").innerText = data.data.book;
-        document.getElementById("book-name").innerText = data.data.bookName;
+        document.getElementById("book-name").innerText = `Book: ${data.data.bookName}`;
+        document.getElementById("chapter-name").innerText = data.data.chapterName;
+        document.getElementById("narrator").innerText = data.data.header;
         document.getElementById("refno").innerText = data.data.refno;
-      } catch (err) {}
+
+      } catch (err) {
+        console.error("Error fetching hadith:", err);
+      }
     }
   </script>
   <script type="module">
