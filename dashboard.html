@@ -524,7 +524,7 @@
 
     async function loadHadith() {
       try {
-        const res = await fetch('https://random-hadith-generator.vercel.app/bukhari');
+        const res = await fetch('https://corsproxy.io/?https://random-hadith-generator.vercel.app/bukhari');
         const data = await res.json();
         document.getElementById("daily-hadith").innerText = data.data.hadith_english;
         document.getElementById("modal-hadith-content").innerText = data.data.hadith_english;
