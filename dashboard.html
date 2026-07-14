@@ -329,11 +329,29 @@
           <h5 class="modal-title fw-bold text-success"><i class="bi bi-quote me-2"></i>Daily Hadith</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body pt-2">
-          <h4 id="book"></h4><h6 id="book-name"></h6>
-          <p class="lead text-dark" id="modal-hadith-content" style="font-size: 1.1rem; line-height: 1.8;">Loading...</p>
-          <h6 id="refno"></h6>
-        </div>
+       <!-- INSIDE YOUR MODAL -->
+<div class="modal-body pt-3">
+  
+  <h5 id="book-name" class="fw-bold mb-1 text-dark"></h5>
+  <h6 id="grade" class="text-muted small mb-3"></h6>
+  
+  <!-- ARABIC TEXT SECTION (Right-to-Left) -->
+  <div class="p-4 bg-light rounded-4 mb-4 border">
+    <p id="modal-hadith-arabic" class="mb-0 text-dark" dir="rtl" style="font-size: 1.35rem; line-height: 2; text-align: right; font-family: 'Amiri', 'Traditional Arabic', serif;">
+      Loading Arabic text...
+    </p>
+  </div>
+
+  <!-- ENGLISH TEXT SECTION -->
+  <div class="mb-3">
+    <h6 id="narrator" class="fw-bold small text-success mb-2"></h6>
+    <p class="text-dark" id="modal-hadith-content" style="font-size: 1.05rem; line-height: 1.8;">
+      Loading English text...
+    </p>
+  </div>
+  
+  <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2" id="refno"></span>
+</div>
       </div>
     </div>
   </div>
@@ -522,19 +540,34 @@
       document.getElementById('next-prayer-ampm').textContent = (next === "Fajr") ? "AM" : "PM";
     }
 
-    async function loadHadith() {
-      try {
-        const response = await fetch(
-            `https://www.ummahapi.com/api/hadith/random`
-        );
-        const data = await res.json();
-        document.getElementById("daily-hadith").innerText = data.data.hadith_english;
-        document.getElementById("modal-hadith-content").innerText = data.data.hadith_english;
-        document.getElementById("book").innerText = data.data.book;
-        document.getElementById("book-name").innerText = data.data.bookName;
-        document.getElementById("refno").innerText = data.data.refno;
-      } catch (err) {}
+ async function loadHadith() {
+  try {
+    const response = await fetch(`https://www.ummahapi.com/api/hadith/random`);
+    const data = await response.json(); 
+    
+    console.log("Hadith API Data:", data);
+
+
+    document.getElementById("daily-hadith").innerText = data.data.english;
+
+  
+    document.getElementById("modal-hadith-arabic").innerText = data.data.arabic; 
+    document.getElementById("modal-hadith-content").innerText = data.data.english;
+    
+
+    document.getElementById("book-name").innerText = data.data.collection_name;
+
+    if(document.getElementById("grade")) {
+        document.getElementById("grade").innerText = data.data.grade;
     }
+
+    document.getElementById("refno").innerText = `Ref: ${data.data.id}`;
+
+  } catch (err) {
+    console.error("Error loading hadith:", err); 
+    document.getElementById("daily-hadith").innerText = "Unable to load daily hadith at this time.";
+  }
+}
   </script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
